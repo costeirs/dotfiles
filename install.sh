@@ -35,6 +35,7 @@ brew tap homebrew/cask-drivers
 
 # Apps (Casks)
 apps=(
+  angry-ip-scanner
   bettertouchtool
   diffmerge
   docker
@@ -44,6 +45,7 @@ apps=(
   iterm2
   jetbrains-toolbox
   licecap
+  mysqlworkbench
   paw
   qlcolorcode
   qlmarkdown
@@ -51,9 +53,11 @@ apps=(
   quicklook-csv
   quicklook-json
   sequel-pro-nightly
+  sketch
   sonos
   sourcetree
   suspicious-package
+  texstudio
   vagrant
   virtualbox
   visual-studio-code
