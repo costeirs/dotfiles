@@ -21,17 +21,22 @@ fi
 
 brew update
 
+# Brew Taps
+brew tap caskroom/cask
+brew tap homebrew/cask-versions
+brew tap homebrew/cask-drivers
+brew tap heroku/brew
+
 # Utilities
 apps=(
     awscli
     composer
+    heroku
     mas
     node
 )
 
-brew tap caskroom/cask
-brew tap homebrew/cask-versions
-brew tap homebrew/cask-drivers
+brew install ${apps[@]}
 
 # Apps (Casks)
 apps=(
