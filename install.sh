@@ -78,16 +78,16 @@ brew cask install --appdir="/Applications" ${apps[@]}
 
 # Apps (AppStore)
 apps=(
-    497799835 # Xcode (10.2.1)
-    425424353 # The Unarchiver (4.1.0)
-    406825478 # Telephone (1.4)
-    466314666 # Dont Sleep (1.1)
-    462058435 # Microsoft Excel (16.25)
-    462054704 # Microsoft Word (16.25)
-    462062816 # Microsoft PowerPoint (16.25)
-    784801555 # Microsoft OneNote (16.25)
-    1295203466 # Microsoft Remote Desktop (10.2.13)
-    1385985095 # uBlock (1.3)
+    497799835 # Xcode
+    425424353 # The Unarchiver
+    406825478 # Telephone
+    466314666 # Don't Sleep
+    462058435 # Microsoft Excel
+    462054704 # Microsoft Word
+    462062816 # Microsoft PowerPoint
+    784801555 # Microsoft OneNote
+    1295203466 # Microsoft Remote Desktop
+    1385985095 # uBlock
 )
 mas upgrade
 mas install ${apps[@]}
@@ -95,6 +95,9 @@ mas install ${apps[@]}
 # Cleanup
 
 brew cleanup
+
+# Composer
+composer global require hirak/prestissimo
 
 # Preferences
 
