@@ -47,6 +47,7 @@ apps=(
   firefox
   flux
   google-chrome
+  insomnia
   iterm2
   jetbrains-toolbox
   licecap
