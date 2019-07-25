@@ -30,6 +30,7 @@ brew tap heroku/brew
 # Utilities
 apps=(
     awscli
+    awsebcli
     composer
     heroku
     mas
