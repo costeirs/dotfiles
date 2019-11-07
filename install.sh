@@ -59,6 +59,7 @@ apps=(
   qlstephen
   quicklook-csv
   quicklook-json
+  scroll-reverser
   sequel-pro-nightly
   sketch
   sonos
@@ -82,14 +83,16 @@ brew cask install --appdir="/Applications" ${apps[@]}
 apps=(
     497799835 # Xcode
     425424353 # The Unarchiver
-    406825478 # Telephone
+    #406825478 # Telephone
     466314666 # Don't Sleep
     462058435 # Microsoft Excel
     462054704 # Microsoft Word
     462062816 # Microsoft PowerPoint
     784801555 # Microsoft OneNote
-    1295203466 # Microsoft Remote Desktop
+    1295203466 # Microsoft Remote Desktop 10
     1385985095 # uBlock
+    1278508951 # Trello
+    1462114288 # Grammarly
 )
 mas upgrade
 mas install ${apps[@]}
@@ -154,3 +157,7 @@ defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
 
 killall Finder
+
+# Additional Preferences
+## Scroll Reverser
+cp com.pilotmoon.scroll-reverser.plist ~/Library/Preferences/com.pilotmoon.scroll-reverser.plist
