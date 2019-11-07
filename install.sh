@@ -50,6 +50,7 @@ apps=(
   google-chrome
   insomnia
   iterm2
+  itsycal
   jetbrains-toolbox
   licecap
   mysqlworkbench
@@ -160,4 +161,4 @@ killall Finder
 
 # Additional Preferences
 ## Scroll Reverser
-cp com.pilotmoon.scroll-reverser.plist ~/Library/Preferences/com.pilotmoon.scroll-reverser.plist
+cp Preferences/* ~/Library/Preferences/
