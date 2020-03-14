@@ -1,21 +1,13 @@
 #!/usr/bin/env bash
 
-function mkcd() {
-	command mkdir "$1" && cd "$1" || return
-}
-alias artisan="php artisan"
-export HISTCONTROL=ignoreboth:erasedups
-
-eval "$(/usr/libexec/path_helper -s)"
-
-export PATH="/Applications/MAMP/bin/php/php7.3.8/bin:$PATH"
+# Paths
+export PATH="/usr/local/bin:$PATH"
 export PATH="$PATH:~/.composer/vendor/bin"
 export PATH="$PATH:~/spark-installer"
+eval "$(/usr/libexec/path_helper -s)"
 
-alias ..="cd .."
-
-test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
-
+# Exports
+export HISTCONTROL=ignoreboth:erasedups
 export OPENCOLLECTIVE_HIDE=1
 export DISABLE_OPENCOLLECTIVE=1
 export SUPPRESS_SUPPORT=1
@@ -25,12 +17,22 @@ export ANSIBLE_NOCOWS=1
 export LESS="-R"
 export CLICOLOR=1
 
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# Aliases
+alias ..="cd .."
+alias artisan="php artisan"
+
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias ll="ls -laG"
 else
 	alias ll="ls -la --color=auto"
 fi
 
+# Functions
+mkcd() {
+	command mkdir -p "$1" && cd "$1" || return
+}
 extract() {
 	if [ -f "$1" ]; then
 		case "$1" in

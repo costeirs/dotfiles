@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 sudo -v # Ask for the administrator password upfront
 # Keep-alive: update existing `sudo` time stamp until script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -12,153 +11,22 @@ xcode-select --install
 git config --global user.name "Stephen Costeira"
 git config --global user.email "costeirs@users.noreply.github.com"
 
-# Check for Homebrew,
+# Homebrew,
 # Install if we don't have it
-if test ! $(which brew); then
+if test ! "$(which brew)"; then
   echo "Installing homebrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 brew update
-
-# Brew Taps
-brew tap caskroom/cask
-brew tap homebrew/cask-versions
-brew tap homebrew/cask-drivers
-brew tap heroku/brew
-
-# Utilities
-apps=(
-    awscli
-    awsebcli
-    composer
-    heroku
-    mas
-    node
-)
-
-brew install ${apps[@]}
-
-# Apps (Casks)
-apps=(
-  angry-ip-scanner
-  bettertouchtool
-  diffmerge
-  docker
-  firefox
-  flux
-  google-chrome
-  insomnia
-  iterm2
-  itsycal
-  jetbrains-toolbox
-  licecap
-  mysqlworkbench
-  paw
-  qlcolorcode
-  qlmarkdown
-  qlstephen
-  quicklook-csv
-  quicklook-json
-  scroll-reverser
-  sequel-pro-nightly
-  sketch
-  sonos
-  sourcetree
-  suspicious-package
-  texstudio
-  vagrant
-  virtualbox
-  visual-studio-code
-  vlc
-)
-
-brew cask install --appdir="/Applications" ${apps[@]}
-
-# Apps (Drivers)
-# apps=(
-# )
-# brew cask install ${apps[@]}
-
-# Apps (AppStore)
-apps=(
-    497799835 # Xcode
-    425424353 # The Unarchiver
-    #406825478 # Telephone
-    466314666 # Don't Sleep
-    462058435 # Microsoft Excel
-    462054704 # Microsoft Word
-    462062816 # Microsoft PowerPoint
-    784801555 # Microsoft OneNote
-    1295203466 # Microsoft Remote Desktop 10
-    1385985095 # uBlock
-    1278508951 # Trello
-    1462114288 # Grammarly
-)
-mas upgrade
-mas install ${apps[@]}
-
-# Cleanup
-
+brew bundle --verbose install
 brew cleanup
 
-# Composer
-composer global require hirak/prestissimo
-
-# Preferences
-
-#"Automatically quit printer app once the print jobs complete"
-defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-#"Disable smart quotes and smart dashes as they are annoying when typing code"
-defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
-defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-
-#"Disabling press-and-hold for keys in favor of a key repeat"
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
-#"Enabling full keyboard access for all controls (e.g. enable Tab in modal dialogs)"
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
-#"Showing icons for hard drives, servers, and removable media on the desktop"
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder AppleShowAllFiles -bool true        # Finder: Show hidden files by default
-defaults write NSGlobalDomain AppleShowAllExtensions -bool true     # Finder: Show all filename extensions
-defaults write com.apple.finder ShowStatusBar -bool true            # Finder: Show status bar
-defaults write com.apple.finder ShowPathbar -bool true              # Finder: Show path bar
-defaults write com.apple.finder _FXSortFoldersFirst -bool true      # Finder: Keep folders on top when sorting by name
-
-#"Disabling the warning when changing a file extension"
-defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
-
-#"Avoiding the creation of .DS_Store files on network volumes"
-defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
-
-#"Setting Dock to auto-hide and removing the auto-hiding delay"
-defaults write com.apple.dock autohide -bool true
-defaults write com.apple.dock autohide-delay -float 0
-defaults write com.apple.dock autohide-time-modifier -float 0
-
-#"Preventing Time Machine from prompting to use new hard drives as backup volume"
-defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
-
-#"Enabling Safari's debug menu"
-defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
-
-#"Enabling the Develop menu and the Web Inspector in Safari"
-defaults write com.apple.Safari IncludeDevelopMenu -bool true
-defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
-defaults write com.apple.Safari "com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled" -bool true
-
-# Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
-
-
-
-killall Finder
-
 # Additional Preferences
-## Scroll Reverser
-cp Preferences/* ~/Library/Preferences/
+cp -n Preferences/* ~/Library/Preferences/
+cp -n .bash_profile ~/
+
+# Run all recipes
+for script in ./apps/*.sh; do
+  bash $script
+done
