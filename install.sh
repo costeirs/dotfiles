@@ -7,6 +7,8 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 set +e
 set -x
 
+softwareupdate --install --all
+
 xcode-select --install
 git config --global user.name "Stephen Costeira"
 git config --global user.email "costeirs@users.noreply.github.com"

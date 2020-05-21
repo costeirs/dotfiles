@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Paths
-export PATH="/usr/local/bin:$PATH"
+export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH="$PATH:~/.composer/vendor/bin"
 export PATH="$PATH:~/spark-installer"
 eval "$(/usr/libexec/path_helper -s)"
