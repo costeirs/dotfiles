@@ -27,6 +27,7 @@ brew cleanup
 # Additional Preferences
 cp -n Preferences/* ~/Library/Preferences/
 cp -n .bash_profile ~/
+cp -n .vimrc ~/
 
 # Run all recipes
 for script in ./apps/*.sh; do

@@ -2,9 +2,12 @@
 
 # Paths
 export PATH="/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH="$PATH:~/.composer/vendor/bin"
-export PATH="$PATH:~/spark-installer"
 eval "$(/usr/libexec/path_helper -s)"
+
+# NVM
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # Exports
 export HISTCONTROL=ignoreboth:erasedups
@@ -21,8 +24,8 @@ test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shel
 
 # Aliases
 alias ..="cd .."
-alias artisan="php artisan"
 
+# Cross-platform `ll` with colors
 if [[ "$(uname -s)" == "Darwin" ]]; then
 	alias ll="ls -laG"
 else
@@ -33,6 +36,7 @@ fi
 mkcd() {
 	command mkdir -p "$1" && cd "$1" || return
 }
+
 extract() {
 	if [ -f "$1" ]; then
 		case "$1" in
@@ -53,16 +57,3 @@ extract() {
 		echo "'$1' is not a valid file"
 	fi
 }
-
-aws_keys() {
-	if [ -f "$1" ]; then
-		sed 1d "$1" | while IFS=, read -r aws_username aws_password aws_id aws_secret aws_url; do
-			echo "# $aws_username"
-			echo "export AWS_ACCESS_KEY_ID=$aws_id"
-			echo " export AWS_SECRET_ACCESS_KEY=$aws_secret"
-		done
-	else
-		echo "'$1' is not a valid file"
-	fi
-}
-
